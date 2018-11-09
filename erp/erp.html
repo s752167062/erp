@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="neon.css">
+  <script src="js/ajax_erp.js"></script>
+  <script>
+    getSkuList();
+  </script>
+</head>
+
+<body class="bg-dark modal-open" style="padding-right: 15px;">
+  <div class="py-5 text-center text-white" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url(https://static.pingendo.com/cover-bubble-dark.svg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <h1 class="mb-3">I enjoy with my whole heart</h1>
+          <p class="lead mb-0">I am alone, and feel the charm of existence in this spot.</p> <a class="btn btn-link m-3" href="#">Read more</a> <a class="btn btn-primary m-3" href="#" data-target="#dailyModal" data-toggle="modal">Buy now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="nav-item"> <a href="" class="nav-link" data-toggle="tab" data-target="#tabone">Tab 1</a> </li>
+            <li class="nav-item"> <a href="" class="nav-link active show" data-toggle="tab" data-target="#tabtwo">Tab 2</a> </li>
+            <li class="nav-item"> <a href="" class="nav-link" data-toggle="tab" data-target="#tabthree">Tab 3</a> </li>
+          </ul>
+          <div class="tab-content mt-2">
+            <div class="tab-pane fade" id="tabone" role="tabpanel">
+              <p class="">When I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms.</p>
+              <div class="row">
+                <div class="col-md-11"></div>
+                <div class="col-md-1"><a class="btn btn-outline-primary" href="#" data-toggle="modal" data-target="#skuModal">Outline one</a></div>
+              </div>
+              <div class="row" id="sku" >
+              </div>
+            </div>
+            <div class="tab-pane fade active show" id="tabtwo" role="tabpanel">
+              <p class="">Who formed us in his own image, and the breath of that universal love which bears and sustains us. And then, my friend.</p>
+              <div class="row">
+                <div class="col-md-11"></div>
+                <div class="col-md-1"><a class="btn btn-outline-primary" href="#" data-toggle="modal" data-target="#edModal">Outline two</a></div>
+              </div>
+              <div class="row" id="exp" >
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tabthree" role="tabpanel">
+              <p class="">In my soul and absorb its power, like the form of a beloved mistress, then I often think with longing.</p>
+              <div class="row">
+                <div class="col-md-11"></div>
+                <div class="col-md-1"><a class="btn btn-outline-primary" href="#">Outline three</a></div>
+              </div>
+              <div class="row" id="" >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--tab1弹窗-->
+    <div class="container">
+      <div class="modal fade" id="skuModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="col-md-12">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-content" id="modal_alert">
+              </div>
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" contenteditable="true">sku edit</h5>
+              </div>
+              <div class="modal-body" style="">
+                <form id="c_form-h" class="" enctype="multipart/form-data" name="skuinfo">
+                  <div class="form-group row"> <label for="sku_id" class="col-form-label text-dark col-3">sku_id</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="sku_id" placeholder="name" name="sku_idname"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="sku_name" class="col-form-label text-dark col-3">sku_name</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="sku_name" placeholder="name" name="sku_namename"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="sku_num" class="col-form-label text-dark col-3">sku_num</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="sku_num" placeholder="sku_numname"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="sku_baseMoney" class="col-form-label text-dark col-3">sku_baseMoney</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="sku_baseMoney" placeholder="sku_baseMoneyname"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="sku_sellMoney" class="col-form-label text-dark col-3">sku_sellMoney</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="sku_sellMoney" placeholder="sku_sellMoneyname"> </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="addsku()">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--tab2弹窗-->
+    <div class="container">
+      <div class="modal fade" id="edModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="col-md-12">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-content" id="modal_alert">
+              </div>
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" contenteditable="true">express delivery edit</h5>
+              </div>
+              <div class="modal-body" style="">
+                <form id="c_form-h" class="" enctype="multipart/form-data" name="expinfo">
+                  <div class="form-group row"> <label for="exp_id" class="col-form-label text-dark col-3">exp_id</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="exp_id" placeholder="name" name="exp_idname"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="exp_num" class="col-form-label text-dark col-3">exp_num</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="exp_num" placeholder="exp_numname"> </div>
+                  </div>
+                  <div class="form-group row"> <label for="exp_money" class="col-form-label text-dark col-3">exp_money</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="exp_money" placeholder="exp_moneyname"> </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="editExp()">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--daily弹窗-->
+    <div class="container">
+      <div class="modal fade show" id="dailyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="col-md-12">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-content" id="modal_alert">
+              </div>
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" contenteditable="true">dailyModal edit</h5>
+              </div>
+              <div class="modal-body" style="">
+                <form id="c_form-h" class="" enctype="multipart/form-data" name="dailyinfo">
+                  <div class="form-group row"> <label for="exp_id" class="col-form-label text-dark col-3">admoney</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control text-dark" id="admoney" placeholder="name" name="exp_idname" oninput="onInput(this)" value=""> </div>
+                  </div>
+                  <div class="form-group row" id="daily_expnum">
+                    <!-- order list -->
+                    <label for="exp_num" class="col-form-label text-dark col-3">ad_orderexport</label>
+                    <div class="col-3 mb-1">
+                      <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" value="" name="order_sku"> Dropdown </button>
+                        <div class="dropdown-menu" id="orderSkuSeleter_menu"> 
+                          <!-- <a class="dropdown-item" href="#" onclick="orderSkuSeleter()" value="">Action</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#" onclick="orderSkuSeleter()" value="">Separated link</a> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-1">
+                      <input type="text" class="form-control text-dark" name="order_num" placeholder="exp_numname"  oninput="onInput(this)" value="">
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-9">
+                    </div>
+                    <div class="col-3">
+                      <a class="btn btn-info" href="#" onclick="addDailyOrderHtml()">add exp order</a>
+                    </div>
+                  </div>
+                  <div class="form-group row" id="daily_fake">
+                    <!-- fake list -->
+                    <label for="exp_money" class="col-form-label text-dark col-2">fake_orderexport</label>
+                    <div class="col-3 mb-1">
+                      <input type="text" class="form-control text-dark" name="fake_num" placeholder="exp_moneyname" oninput="onInput(this)" value=""> </div>
+                    <label for="exp_money" class="col-form-label text-dark col-1">fake_usemoney</label>
+                    <div class="col-3 mb-1">
+                      <input type="text" class="form-control text-dark" name="fake_money" placeholder="exp_moneyname" oninput="onInput(this)" value=""> </div>
+                    <div class="col-3 mb-1">
+                      <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" name="fake_sku"> Dropdown </button>
+                        <div class="dropdown-menu" id="fakeSkuSeleter_menu"> 
+               <!--            <a class="dropdown-item" href="#">Action</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a> -->
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-9">
+                    </div>
+                    <div class="col-3">
+                      <a class="btn btn-info" href="#" onclick="addDailyFakeHtml()">add fake order</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="dailyUse()">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
