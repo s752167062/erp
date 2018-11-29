@@ -68,6 +68,29 @@ function goodshistory(req , res){
     }  
 }
 
+function deletekeeper(req, res){
+    console.log(">>>> deletekeeper  ");
+    var query = req.query;
+    if(query){
+        console.log(query)
+        var id = query.id;
+        if(id){
+            mongodbMgr.deleteRow(conf.keeper , {goods_id:id} ,function(result){
+                if(result){
+                    var data ={};
+                    data.status = 1;
+                    data.data = result;
+
+                    res.send(JSON.stringify(data));
+                    return ;
+                }
+
+                res.send("{ \"status\":0 ,  \"msg\":\"没有数据\"}")
+            })
+        } 
+    }  
+}
+
 
 function makeKeeperRow(path){
     var goods_id = "goods_id"
@@ -116,6 +139,7 @@ module.exports = function(app){
         app.get("/addkeeper", addkeeper); //添加监控对象
         app.get("/allkeeper", allkeeper);
         app.get("/goodshistory", goodshistory);
+        app.get("/deletekeeper", deletekeeper);
         // app.post("/upload", upload.single('iconfile') , createGame); //接收上传的ICON
     }
 }

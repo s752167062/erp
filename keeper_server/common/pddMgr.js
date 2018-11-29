@@ -22,13 +22,14 @@ pddMgr.prototype.hookDataByID = function(id , callback){
 };
 
 pddMgr.prototype.hookAll= function(){
+	var that = this;
 	mongodbMgr.select(conf.keeper, {} , function(list){
 		if(list){
 			for (var i = 0; i < list.length; i++) {
 				var item = list[i];
 				var id = item.goods_id;
 
-				pddMgr.hookDataByID(id,function(data){
+				that.hookDataByID(id,function(data){
 			        if(data){
 			            //hook 到数据
 			            mongodbMgr.instertRow(id , data , function(res){
