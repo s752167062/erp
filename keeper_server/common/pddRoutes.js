@@ -9,15 +9,16 @@ function addkeeper(req , res){
     var query = req.query;
     if(query){
         console.log(query)
-        var path = query.path;
-        if(path){
+        var id = query.id;
+        if(id){
+            var path = conf.goodspath + id
             var data = makeKeeperRow(path)
             if(data){
                 mongodbMgr.instertRow(conf.keeper , data , function(result){
                     if(result){
                         //创建记录表 记录数据变化
                         createIDKeeperHistory(data.goods_id)
-                        res.send("{ \"status\":1 ")
+                        res.send("{ \"status\":1 }")
                     }
                 })
                 
@@ -96,6 +97,11 @@ function hookall(req,res){
     res.send("{ \"status\":1 ,  \"msg\":\"\"}")
 }
 
+function fixkeeper(req,res){
+    pddMgr.fixkeeper();
+    res.send("{ \"status\":1 ,  \"msg\":\"\"}")
+}
+
 function makeKeeperRow(path){
     var goods_id = "goods_id"
     var start = path.indexOf(goods_id);
@@ -127,7 +133,12 @@ function createIDKeeperHistory(id){
             mongodbMgr.createTable("t_" +id, function(res){
                 if(res){
                     mongodbMgr.instertRow("t_" +id , data, function(res_){
-
+                        if(res_){
+                            //同步更新下 keeper 表中的图片地址
+                            mongodbMgr.updateRow(conf.keeper , {"goods_id":id } , {"img":data.img ,"title":data.title} ,function(result){
+                                console.log(">>>>> //同步更新下 keeper 表中的图片地址  ");
+                            })
+                        }
                     }) 
                 }
             });
@@ -135,6 +146,8 @@ function createIDKeeperHistory(id){
         }
     })
 }
+
+
 
 
 module.exports = function(app){
@@ -145,6 +158,7 @@ module.exports = function(app){
         app.get("/goodshistory", goodshistory);
         app.get("/deletekeeper", deletekeeper);
         app.get("/hookall", hookall);
+        app.get("/fixkeeper", fixkeeper);
         // app.post("/upload", upload.single('iconfile') , createGame); //接收上传的ICON
     }
 }

@@ -12,7 +12,7 @@ app.listen(16888, function () {
   	console.log('版本服务启动 : 16888');
 });
 
-app.use(express.static("./../pddlistener"))
+app.use(express.static("./../keeper"))
 
 
 module.export = app;

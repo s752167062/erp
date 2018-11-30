@@ -58,5 +58,35 @@ pddMgr.prototype.hookAll= function(){
 	
 }
 
+pddMgr.prototype.fixkeeper = function(){
+	var that = this;
+	mongodbMgr.select(conf.keeper, {} , function(list){
+		if(list){
+			//这里批量操作数据库和网络需要 异步协作
+			ep.after('fixkeeper', list.length, function (topics) {
+			  // topics 是个数组，包含了 10 次 ep.emit('fixkeeper', id) 中的那 10 个 id
+			  // 开始行动
+			  console.log(">>>>> fixkeeper after topics :");
+			  console.log(topics);
+			});
+
+			list.forEach(function(item) {
+				var id = item.goods_id;
+				that.hookDataByID(id,function(data){
+				    if(data){
+			            //hook数据 到keeper
+			            mongodbMgr.updateRow(conf.keeper , {"goods_id":id } , {"img":data.img , "title":data.title} ,function(result){
+			            	ep.emit('fixkeeper', id);
+			            });   
+				    }else{
+				    	ep.emit('fixkeeper', id);
+				    }
+				});
+			});
+
+		}
+	});
+}
+
 const pddmgr = new pddMgr()
 module.exports = pddmgr
