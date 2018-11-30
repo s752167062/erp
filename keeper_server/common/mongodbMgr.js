@@ -29,11 +29,12 @@ mongodbMgr.prototype.close = function(){
 mongodbMgr.prototype.select = function(table , select, callback){
 	var select_ = select;
 	if(!select_){
+		console.log(">>>>> mongodbMgr select {} ")
 		select_ = {};
 	}
 
 	if(dbpdd){
-		dbpdd.collection(table).find({}).toArray(function(err, result){
+		dbpdd.collection(table).find(select_).toArray(function(err, result){
 			console.log(">>> mongo select ");
 			if (err) {
 				console.log(">>> mongo select err : " + err);

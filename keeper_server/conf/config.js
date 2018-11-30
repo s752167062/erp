@@ -1,7 +1,7 @@
 const Conf = {
-	number:".g-sales regular-text",
+	number:".g-sales",
 	price:".price-range",
-	img:"img",
+	img:"div#banner>img",
 	title:".enable-select",
 	pingjia:".goods-reviews-num",
 	coupon:".g-h-coupon",

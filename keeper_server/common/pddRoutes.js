@@ -52,7 +52,7 @@ function goodshistory(req , res){
         console.log(query)
         var id = query.id;
         if(id){
-            mongodbMgr.select(id , {} ,function(result){
+            mongodbMgr.select("t_" +id , {} ,function(result){
                 if(result){
                     var data ={};
                     data.status = 1;
@@ -75,7 +75,7 @@ function deletekeeper(req, res){
         console.log(query)
         var id = query.id;
         if(id){
-            mongodbMgr.deleteRow(conf.keeper , {goods_id:id} ,function(result){
+            mongodbMgr.deleteRow(conf.keeper , {"goods_id":id} ,function(result){
                 if(result){
                     var data ={};
                     data.status = 1;
@@ -91,6 +91,10 @@ function deletekeeper(req, res){
     }  
 }
 
+function hookall(req,res){
+    pddMgr.hookAll();
+    res.send("{ \"status\":1 ,  \"msg\":\"\"}")
+}
 
 function makeKeeperRow(path){
     var goods_id = "goods_id"
@@ -120,9 +124,9 @@ function createIDKeeperHistory(id){
     pddMgr.hookDataByID(id,function(data){
         if(data){
             //hook 到数据
-            mongodbMgr.createTable(id, function(res){
+            mongodbMgr.createTable("t_" +id, function(res){
                 if(res){
-                    mongodbMgr.instertRow(id , data, function(res_){
+                    mongodbMgr.instertRow("t_" +id , data, function(res_){
 
                     }) 
                 }
@@ -140,6 +144,7 @@ module.exports = function(app){
         app.get("/allkeeper", allkeeper);
         app.get("/goodshistory", goodshistory);
         app.get("/deletekeeper", deletekeeper);
+        app.get("/hookall", hookall);
         // app.post("/upload", upload.single('iconfile') , createGame); //接收上传的ICON
     }
 }
