@@ -88,5 +88,22 @@ pddMgr.prototype.fixkeeper = function(){
 	});
 }
 
+/// mall
+pddMgr.prototype.hookMallDataByID = function(id ,callback){
+	console.log('>>>>> hookMallDataByID id : ' + id)
+	mongodbMgr.select(conf.maller, { "mall_id":id } , function(data){
+		console.log('>>>> hookMallDataByID select ')
+		if(data && data[0]){
+			console.log(data);
+			var path = data[0].path;
+			netMgr.httpGetMall(path,function(data){
+				if(data){
+					callback(data);
+				}
+			})
+		}
+	});
+}
+
 const pddmgr = new pddMgr()
 module.exports = pddmgr

@@ -10,7 +10,10 @@ const Conf = {
 	
 	sql:"mongodb://localhost:27017/",
 	pdd:"pddkeeper",
-	keeper:"keeper"
+	keeper:"keeper",
+	maller:"maller",
+	
+	mallpath:"https://mobile.yangkeduo.com/mall_page.html?mall_id="
 }
 
 module.exports = Conf;
